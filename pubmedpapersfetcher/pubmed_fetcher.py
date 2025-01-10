@@ -91,10 +91,13 @@ def fetch_paper_details(pubmed_ids: List[str], debug: bool) -> List[Dict[str, st
                     for author in authors
                 )
                 pdate = paper_data['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']
+                pDay = pdate.get('Day', '')
+                pMonth = pdate.get('Month', '')
+                pYear = pdate.get('Year')
                 paper = {
                     "PubmedID": pubmed_id,
                     "Title": paper_data['MedlineCitation']['Article']['ArticleTitle'],
-                    "PublicationDate": f"{pdate.get('Day', "")}/{pdate.get('Month', "")}/{pdate.get('Year')}",
+                    "PublicationDate": f"{pDay}/{pMonth}/{pYear}",
                     "Authors": authors_name,
                     "Affiliation": authors_affiliation,
                     "Email": authors_email
