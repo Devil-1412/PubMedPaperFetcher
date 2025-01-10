@@ -1,7 +1,6 @@
 import requests
 import xmltodict
 import pandas as pd
-import argparse
 import re
 from typing import List, Dict
 
