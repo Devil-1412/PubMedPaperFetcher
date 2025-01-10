@@ -1,14 +1,23 @@
 from openai import OpenAI
 import json
+from typing import List, Dict
 
 API_KEY = "api key for openai"
 # Set your OpenAI API key
 client = OpenAI(api_key = API_KEY)
 
 
-def process_query_with_llm(query, debug):
+def process_query_with_llm(query: str, debug: bool) -> Dict[str, str]:
     """
     Use an LLM to process a natural language query and extract structured search parameters.
+
+    Args:
+    - query (str): The natural language query to process.
+    - debug (bool): Flag to print debug messages.
+
+    Returns:
+    - Dict[str, str]: A dictionary containing the extracted search parameters:
+                       'keywords', 'year', and 'affiliation_type'.
     """
     if debug:
         print(f"Processing query with LLM: {query}")
@@ -56,7 +65,17 @@ def process_query_with_llm(query, debug):
     return parameters
 
 
-def build_pubmed_query(parameters, debug):
+def build_pubmed_query(parameters: Dict[str, str], debug: bool) -> str:
+    """
+    Build a PubMed query string based on the structured parameters.
+
+    Args:
+    - parameters (Dict[str, str]): The structured search parameters extracted by the LLM.
+    - debug (bool): Flag to print debug messages.
+
+    Returns:
+    - str: A string representing the constructed PubMed query.
+    """
     if debug:
         print("Building PubMed query")
 

@@ -3,12 +3,20 @@ import xmltodict
 import pandas as pd
 import argparse
 import re
+from typing import List, Dict
 
 
 # Function to search PubMed database
-def search_pubmed(query, debug):
+def search_pubmed(query:str, debug:bool) -> List[str]:
     """
     Search PubMed using the provided query and return a list of PubMed IDs.
+
+    Args:
+    - query (str): Search query for PubMed.
+    - debug (bool): Flag to print debug messages.
+
+    Returns:
+    - List[str]: A list of PubMed IDs.
     """
     if debug:
         print("Searching PubMed for query")
@@ -36,9 +44,16 @@ def search_pubmed(query, debug):
 
 
 # Function to fetch paper details by PubMed IDs
-def fetch_paper_details(pubmed_ids, debug):
+def fetch_paper_details(pubmed_ids: List[str], debug: bool) -> List[Dict[str, str]]:
     """
     Fetch detailed information for each PubMed ID and return a list of papers.
+
+    Args:
+    - pubmed_ids (List[str]): List of PubMed IDs to fetch paper details.
+    - debug (bool): Flag to print debug messages.
+
+    Returns:
+    - List[Dict[str, str]]: A list of dictionaries containing paper details.
     """
     url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
     papers = []
@@ -100,9 +115,17 @@ def fetch_paper_details(pubmed_ids, debug):
 
 
 # Helper function to extract author details
-def extract_authors_info(paper_data, debug):
+def extract_authors_info(paper_data: Dict, debug: bool) -> (List[Dict[str, str]], bool):
     """
     Extract the authors and their affiliations.
+
+    Args:
+    - paper_data (Dict): Parsed XML data of the paper.
+    - debug (bool): Flag to print debug messages.
+
+    Returns:
+    - List[Dict[str, str]]: A list of dictionaries containing author details.
+    - bool: A flag indicating if any author has a non-academic affiliation.
     """
     if debug:
         print("Extracting authors information")
@@ -139,9 +162,14 @@ def extract_authors_info(paper_data, debug):
 
 
 # Function to save papers to a CSV file
-def save_to_csv(papers, filename, debug):
+def save_to_csv(papers: List[Dict[str, str]], filename: str, debug: bool) -> None:
     """
     Save the list of papers to a CSV file.
+
+    Args:
+    - papers (List[Dict[str, str]]): List of dictionaries containing paper details.
+    - filename (str): The file path where to save the CSV.
+    - debug (bool): Flag to print debug messages.
     """
     if debug:
         print("Saving papers to CSV")
