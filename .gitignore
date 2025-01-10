@@ -6,3 +6,7 @@ poetry.lock
 
 # Ignore code License
 LICENSE.txt
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
