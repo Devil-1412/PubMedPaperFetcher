@@ -1,0 +1,8 @@
+# Ignore virtual environment
+.venv/
+
+# Ignore Poetry's cache
+poetry.lock
+
+# Ignore code License
+LICENSE.txt

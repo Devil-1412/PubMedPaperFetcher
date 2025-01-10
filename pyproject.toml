@@ -1,0 +1,25 @@
+[project]
+name = "PubMedPapersFetcher"
+version = "0.1.0"
+description = "A CLI tool to fetch PubMed papers based on user queries"
+authors = [
+    {name = "Pushpam Agrawal",email = "pushpam160803@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "xmltodict (>=0.14.2,<0.15.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "openai (>=1.59.5,<2.0.0)",
+    "click (>=8.1.8,<9.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+get-papers-list = "pubmedpapersfetcher.main:get_papers_list"
